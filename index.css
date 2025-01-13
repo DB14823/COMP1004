@@ -1,0 +1,78 @@
+body {
+    background-color: #8a8a8a;
+    font-family: monospace;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to right, rgb(42, 41, 41) 30%, #8a8a8a 70%);
+    padding: 10px;
+}
+
+.scaled-image {
+    width: 100px;
+    height: auto;
+}
+
+.header-text {
+    margin-left: 10px;
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+}
+
+.menu {
+    position: absolute;
+    top: 120px; /* Adjust based on header height */
+    left: 0;
+    width: 100px; /* Adjust width as needed */
+    height: calc(100% - 120px); /* Adjust based on header height */
+    background-color: rgb(42, 41, 41);
+    padding: 10px;
+}
+
+.begin{
+    color: white;
+}
+.about{
+    color: white;
+}
+
+.content {
+    margin-left: 120px; /* Adjust based on menu width */
+    display: flex;
+}
+
+.hidden-radio {
+    display: none;
+}
+
+.section {
+    flex: 1;
+    height: 100vh; /* Adjust height as needed */
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.red-section {
+    background-color: rgb(139, 6, 6);
+}
+
+.green-section {
+    background-color: rgb(9, 76, 9);
+}
+
+#red:checked + .red-section {
+    background-color: red;
+}
+
+#green:checked + .green-section {
+    background-color: green;
+}
