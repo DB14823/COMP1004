@@ -4,7 +4,6 @@ body {
     margin: 0;
     padding: 0;
 }
-
 .header {
     display: flex;
     align-items: center;
@@ -15,29 +14,25 @@ body {
     background: linear-gradient(to right, rgb(42, 41, 41) 30%, #8a8a8a 70%);
     padding: 10px;
 }
-
 .scaled-image {
     width: 100px;
     height: auto;
 }
-
 .header-text {
     margin-left: 10px;
     font-size: 24px;
     color: white;
     font-weight: bold;
 }
-
 .menu {
     position: absolute;
-    top: 120px; /* Adjust based on header height */
+    top: 110px; /* Adjust based on header height */
     left: 0;
-    width: 100px; /* Adjust width as needed */
-    height: calc(100% - 120px); /* Adjust based on header height */
+    width: 165px; /* Adjust width as needed */
+    height: calc(100% - 100px); /* Adjust based on header height */
     background-color: rgb(42, 41, 41);
     padding: 10px;
 }
-
 .begin{
     color: white;
 }
@@ -46,8 +41,13 @@ body {
 }
 
 .content {
-    margin-left: 120px; /* Adjust based on menu width */
+    margin-left: 165px; /* Adjust based on menu width */
     display: flex;
+    top: 100px; /* Adjust based on header height */
+    left: 165px; /* Adjust based on menu width */
+    width: calc(100% - 165px); /* Adjust based on menu width */
+    height: 100vh; /* Adjust based on header height */
+    justify-content: end;
 }
 
 .hidden-radio {
@@ -75,4 +75,35 @@ body {
 
 #green:checked + .green-section {
     background-color: green;
+}
+
+.menu .btn {
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.menu .btn.begin {
+    background-color: #707070;
+}
+.menu .btn.about {
+    background-color: #797979;
+}
+.menu .btn.begin:hover {
+    background-color: #424242;
+}
+.menu .btn.about:hover {
+    background-color: #3a3a3a;
+}
+.menu .btn.begin:active {
+    background-color: #171717; /* Even darker shade for active effect */
+}
+.menu .btn.about:active {
+    background-color: #171717; /* Even darker shade for active effect */
 }

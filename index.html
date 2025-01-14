@@ -1,24 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaming and Studying Balancer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
 </head>
-<body>
-    <div class="header">
+<body class="d-flex flex-column vh-100">
+    <div class="header d-flex align-items-center p-2">
         <img src="./titleImage.png" alt="Title Image" class="scaled-image">
-        <span class="header-text">Gaming and Studying Balancer</span>
+        <h1 class="header-text ml-3">Gaming and Studying Balancer</h1>
     </div>
-    <div class="menu">
-        <span class="begin">Start</span><br><br>
-        <span class="about">About</span>
+    <div class="menu p-2">
+        <button class="btn btn-primary begin">Start</button>
+        <button class="btn btn-secondary about">About</button>
     </div>
-    <div class="content">
+    <div class="content d-flex flex-grow-1">
         <input type="radio" id="red" name="section" class="hidden-radio">
-        <label for="red" class="section red-section"></label>
+        <label for="red" class="section red-section flex-fill"></label>
         <input type="radio" id="green" name="section" class="hidden-radio">
-        <label for="green" class="section green-section"></label>
+        <label for="green" class="section green-section flex-fill"></label>
     </div>
+    <div id="json-data" class="mt-4"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('http://localhost:3000/data')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('json-data').innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+                })
+                .catch(error => console.error('Error fetching JSON data:', error));
+        });
+    </script>
 </body>
 </html>
