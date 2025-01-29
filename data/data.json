@@ -1,0 +1,14 @@
+[
+  {
+    "taskName": "Study Math",
+    "timeSpent": 60,
+    "deadline": "2023-12-01",
+    "type": "Task"
+  },
+  {
+    "taskName": "Play Game",
+    "timeSpent": 120,
+    "deadline": "2023-12-02",
+    "type": "Gaming Session"
+  }
+]
