@@ -1,11 +1,37 @@
 $(document).ready(function () {
-  let tasks = []; 
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || []; 
 
+  // Render tasks from local storage on page load
+  renderTasks(tasks);
+
+  // Fetch tasks from data.json (if needed)
   $.getJSON("data/data.json", function (data) {
-    tasks = data; 
-    renderTasks(tasks); 
+    if (tasks.length === 0) { // Only load from data.json if local storage is empty
+      tasks = data; 
+      localStorage.setItem("tasks", JSON.stringify(tasks)); // Save fetched tasks to local storage
+      renderTasks(tasks); 
+    }
   }).fail(function () {
     console.error("Failed to load data.json!");
+  });
+
+  // Handle form submission
+  $("#taskForm").submit(function (event) {
+    event.preventDefault();
+
+    let task = {
+      taskName: $("#taskName").val(),
+      timeSpent: $("#timeSpent").val(),
+      deadline: $("#deadline").val(),
+      type: $("#type").val()
+    };
+
+    tasks.push(task);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    renderTasks(tasks);
+
+    // Clear the form
+    $("#taskForm")[0].reset();
   });
 
   function renderTasks(data) {
@@ -15,7 +41,7 @@ $(document).ready(function () {
     data.forEach((item, index) => {
       let deadlineDate = new Date(item.deadline);
       let formattedDate = deadlineDate.toLocaleDateString('en-UK', {
-       year: 'numeric',
+        year: 'numeric',
         month: 'numeric',
         day: 'numeric'
       });
@@ -27,45 +53,19 @@ $(document).ready(function () {
           <td>${formattedDate}</td>
           <td>${item.type}</td>
           <td>
-            <button class="btn btn-primary btn-sm edit-btn" data-index="${index}">Edit</button>
+            <button class="btn btn-danger btn-sm delete-task" data-index="${index}">Delete</button>
           </td>
-        </tr>`;
+        </tr>
+      `;
       tableBody.append(row);
     });
 
-    $(".edit-btn").click(function () {
+    // Add event listener for delete buttons
+    $(".delete-task").click(function () {
       let index = $(this).data("index");
-      let task = tasks[index];
-
-      $("#taskName").val(task.taskName);
-      $("#timeSpent").val(task.timeSpent);
-      $("#deadline").val(task.deadline);
-      $("#type").val(task.type);
-
-      $("#taskIndex").val(index);
+      tasks.splice(index, 1);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      renderTasks(tasks);
     });
   }
-
-  $("#taskForm").submit(function(event) {
-    event.preventDefault();
-
-    let index = $("#taskIndex").val();
-    let newTask = {
-      taskName: $("#taskName").val(),
-      timeSpent: $("#timeSpent").val(),
-      deadline: $("#deadline").val(),
-      type: $("#type").val()
-    };
-
-    if (index === "") {
-      tasks.push(newTask);
-    } else {
-      tasks[index] = newTask;
-    }
-
-    renderTasks(tasks);
-
-    this.reset();
-    $("#taskIndex").val("");
-  });
 });
