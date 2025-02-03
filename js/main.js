@@ -1,25 +1,30 @@
 $(document).ready(function () {
-  let tasks = []; // To hold the JSON data in-memory
+  let tasks = []; 
 
-  // Fetch data from the JSON file
   $.getJSON("data/data.json", function (data) {
-    tasks = data; // Store data in memory
-    renderTasks(tasks); // Render the tasks
+    tasks = data; 
+    renderTasks(tasks); 
   }).fail(function () {
     console.error("Failed to load data.json!");
   });
 
-  // Function to render tasks into the table
   function renderTasks(data) {
     let tableBody = $("#taskTableBody");
     tableBody.empty();
 
     data.forEach((item, index) => {
+      let deadlineDate = new Date(item.deadline);
+      let formattedDate = deadlineDate.toLocaleDateString('en-UK', {
+       year: 'numeric',
+        month: 'numeric',
+        day: 'numeric'
+      });
+
       let row = `
         <tr>
           <td>${item.taskName}</td>
           <td>${item.timeSpent}</td>
-          <td>${item.deadline}</td>
+          <td>${formattedDate}</td>
           <td>${item.type}</td>
           <td>
             <button class="btn btn-primary btn-sm edit-btn" data-index="${index}">Edit</button>
@@ -28,30 +33,39 @@ $(document).ready(function () {
       tableBody.append(row);
     });
 
-    // Add event listener to edit buttons
     $(".edit-btn").click(function () {
-      const index = $(this).data("index");
-      editTask(index);
+      let index = $(this).data("index");
+      let task = tasks[index];
+
+      $("#taskName").val(task.taskName);
+      $("#timeSpent").val(task.timeSpent);
+      $("#deadline").val(task.deadline);
+      $("#type").val(task.type);
+
+      $("#taskIndex").val(index);
     });
   }
 
-  // Function to edit a task
-  function editTask(index) {
-    const task = tasks[index];
+  $("#taskForm").submit(function(event) {
+    event.preventDefault();
 
-    // Prompt user for new values
-    const newTaskName = prompt("Edit Task Name:", task.taskName);
-    const newTimeSpent = prompt("Edit Time Spent (minutes):", task.timeSpent);
-    const newDeadline = prompt("Edit Deadline (YYYY-MM-DD):", task.deadline);
-    const newType = prompt("Edit Type (Task/Gaming Session):", task.type);
+    let index = $("#taskIndex").val();
+    let newTask = {
+      taskName: $("#taskName").val(),
+      timeSpent: $("#timeSpent").val(),
+      deadline: $("#deadline").val(),
+      type: $("#type").val()
+    };
 
-    // Update the task object if values are provided
-    if (newTaskName) task.taskName = newTaskName;
-    if (newTimeSpent) task.timeSpent = parseInt(newTimeSpent);
-    if (newDeadline) task.deadline = newDeadline;
-    if (newType) task.type = newType;
+    if (index === "") {
+      tasks.push(newTask);
+    } else {
+      tasks[index] = newTask;
+    }
 
-    // Re-render the table with updated data
     renderTasks(tasks);
-  }
+
+    this.reset();
+    $("#taskIndex").val("");
+  });
 });

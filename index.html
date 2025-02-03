@@ -10,7 +10,7 @@
     rel="stylesheet"
   />
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="css/index.css">
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
@@ -19,16 +19,25 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Task & Gaming Tracker</a>
+      <img src="titleImage.png" alt="Title Image" class="title-image">
+      
     </div>
   </nav>
 
-  <!-- Main Content -->
-  <div class="container mt-4">
-    <h1 class="text-center">Welcome to the Task and Gaming Tracker</h1>
-    <hr>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h3>Menu</h3>
+    <ul>
+      <li><a href="#" id="viewTasks">View Tasks</a></li>
+      <li><a href="#" id="viewCalendar">View Calendar</a></li>
+      <li><a href="#" id="addItem">Add New Item</a></li>
+    </ul>
+  </div>
 
-    </div>
-    <div id="main-content">
+  <!-- Main Content -->
+  <div class="container mt-4" id="mainContent">
+    <hr>
+    <div id="taskView">
       <h3>Task List</h3>
       <!-- Bootstrap-styled Table -->
       <div class="table-responsive">
@@ -48,9 +57,14 @@
         </table>
       </div>
     </div>
-    <div class="mt-4">
-      <h3>Add New Task</h3>
+    <div id="calendarView" style="display: none;">
+      <h3>Calendar View</h3>
+      <div id="calendar"></div>
+    </div>
+    <div id="addItemView" style="display: none;">
+      <h3>Add New Item</h3>
       <form id="taskForm">
+        <input type="hidden" id="taskIndex">
         <div class="mb-3">
           <label for="taskName" class="form-label">Task Name</label>
           <input type="text" class="form-control" id="taskName" required>
@@ -75,5 +89,7 @@
     </div>
   </div>
   <script src="js/main.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/calendar.js"></script>
 </body>
 </html>

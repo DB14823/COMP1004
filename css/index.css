@@ -1,4 +1,3 @@
-/* General Styles */
 body {
     background-color: #f8f9fa;
     font-family: Arial, sans-serif;
@@ -12,22 +11,53 @@ body {
 .header {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* Center horizontally */
     width: 100%;
     background: linear-gradient(to right, #343a40, #6c757d);
-    padding: 20px;
+    padding: 10px; /* Reduced padding */
     color: white;
+    height: 50px; /* Set a fixed height */
+    position: relative; /* Ensure the image and title are positioned correctly */
 }
 
 .header img {
-    width: 50px;
+    width: 30px; /* Adjusted width */
     height: auto;
-    margin-right: 20px;
+    position: absolute; /* Position the image absolutely */
+    left: 10px; /* Adjust the left position */
 }
 
 .header h1 {
-    font-size: 24px;
+    font-size: 100px; /* Reduced font size */
     margin: 0;
+    text-align: center; /* Center text */
+}
+.title-image {
+    
+    width: 100px; /* Adjust the width as needed */
+    height: auto;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Navigation Bar Styles */
+.navbar {
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    width: 100%;
+    background: linear-gradient(to right, #343a40, #6c757d);
+    padding: 10px;
+    color: white;
+    height: 100px;
+}
+
+.navbar .navbar-brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 50px;
+    color: white;
 }
 
 .container {
@@ -47,18 +77,21 @@ hr {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
-    max-width: 90%;
-    margin-left: 70px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px; /* Set a maximum width for the main content */
+    margin: 0 auto; /* Center the main content */
 }
 
+/* Table Styles */
 .table-responsive {
     margin-top: 20px;
+    max-width: 100%; /* Ensure the table does not exceed the main content width */
 }
 
 .table {
     width: 100%;
-    margin-bottom: 1rem;
+    max-width: 100%; /* Set a maximum width for the table */
+    margin: 0 auto; /* Center the table */
     color: #212529;
     border-collapse: collapse;
 }
@@ -90,6 +123,16 @@ hr {
 
 .table-striped tbody tr:nth-of-type(odd) {
     background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Form Styles */
+#taskForm {
+    max-width: 2000px; /* Set a maximum width for the form */
+    margin: 50px auto; /* Center the form and add vertical margin */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-label {
@@ -131,12 +174,62 @@ hr {
     margin-bottom: 1rem;
 }
 
-/* Form Styles */
-#taskForm {
-    max-width: 600px;
-    margin: 50px;
+/* Sidebar Styles */
+.sidebar {
+    position: fixed; /* Changed to fixed */
+    top: 100px; /* Adjust this value based on the height of your navbar */
+    left: 0;
+    height: calc(100% - 50px); /* Adjust this value based on the height of your navbar */
+    width: 200px;
+    background-color: #343a40;
+    color: white;
     padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h3 {
+    color: white;
+    margin-top: 0;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.sidebar ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Adjust main content to account for sidebar */
+#mainContent {
+    margin-left: 220px; /* Adjust based on sidebar width */
+    max-width: 800px; /* Set a maximum width for the main content */
+    margin: 0 auto; /* Center the main content */
+}
+
+/* Calendar Styles */
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: auto;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#calendar .day {
     background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #000000;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
 }
