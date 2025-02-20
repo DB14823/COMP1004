@@ -1,14 +1,12 @@
 [
   {
-    "taskName": "Study Maths",
+    "taskName": "Play Game",
     "timeSpent": 60,
-    "deadline": "2023-12-01",
-    "type": "Task"
+    "type": "Gaming Session"
   },
   {
-    "taskName": "Play Game",
+    "taskName": "Study Math",
     "timeSpent": 120,
-    "deadline": "2023-12-02",
-    "type": "Gaming Session"
+    "type": "Study Session"
   }
 ]

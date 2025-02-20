@@ -1,28 +1,74 @@
-$(document).ready(function () {
-  let tasks = JSON.parse(localStorage.getItem("tasks")) || []; 
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-  // Render tasks from local storage on page load
-  renderTasks(tasks);
+function renderTasks(data) {
+  console.log("Rendering tasks:", data);
 
-  // Fetch tasks from data.json (if needed)
-  $.getJSON("data/data.json", function (data) {
-    if (tasks.length === 0) { // Only load from data.json if local storage is empty
-      tasks = data; 
-      localStorage.setItem("tasks", JSON.stringify(tasks)); // Save fetched tasks to local storage
-      renderTasks(tasks); 
+  if (!Array.isArray(data) || data.length === 0) {
+    console.error("renderTasks: No valid data to display.");
+    return;
+  }
+
+  let gamingTableBody = $("#gamingTableBody");
+  let studyTableBody = $("#studyTableBody");
+  gamingTableBody.empty();
+  studyTableBody.empty();
+
+  data.forEach((item, index) => {
+    if (!item || typeof item !== "object") {
+      console.warn("Skipping invalid item:", item);
+      return;
     }
-  }).fail(function () {
-    console.error("Failed to load data.json!");
+
+    let row = `
+      <tr>
+        <td>${item.taskName}</td>
+        <td>${item.timeSpent}</td>
+        <td>
+          <button class="btn btn-danger btn-sm delete-task" data-index="${index}">Delete</button>
+        </td>
+      </tr>
+    `;
+
+    if (item.type === "Gaming Session") {
+      gamingTableBody.append(row);
+    } else if (item.type === "Study Session") {
+      studyTableBody.append(row);
+    }
   });
 
-  // Handle form submission
+  console.log("Gaming table body:", gamingTableBody.html());
+  console.log("Study table body:", studyTableBody.html());
+
+  $(".delete-task").click(function () {
+    let index = $(this).data("index");
+    tasks.splice(index, 1);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    renderTasks(tasks);
+  });
+}
+
+$(document).ready(function () {
+  renderTasks(tasks);
+
+  fetch("data/data.json")
+  .then(response => response.json())
+  .then(data => {
+    console.log("Data fetched:", data);  
+    if (tasks.length === 0) { 
+      tasks = data; 
+      localStorage.setItem("tasks", JSON.stringify(tasks)); 
+      console.log("Updated tasks:", tasks);  
+      renderTasks(tasks); 
+    }
+  })
+  .catch(error => console.error("Error fetching data.json:", error));
+
   $("#taskForm").submit(function (event) {
     event.preventDefault();
 
     let task = {
       taskName: $("#taskName").val(),
       timeSpent: $("#timeSpent").val(),
-      deadline: $("#deadline").val(),
       type: $("#type").val()
     };
 
@@ -30,42 +76,6 @@ $(document).ready(function () {
     localStorage.setItem("tasks", JSON.stringify(tasks));
     renderTasks(tasks);
 
-    // Clear the form
     $("#taskForm")[0].reset();
   });
-
-  function renderTasks(data) {
-    let tableBody = $("#taskTableBody");
-    tableBody.empty();
-
-    data.forEach((item, index) => {
-      let deadlineDate = new Date(item.deadline);
-      let formattedDate = deadlineDate.toLocaleDateString('en-UK', {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric'
-      });
-
-      let row = `
-        <tr>
-          <td>${item.taskName}</td>
-          <td>${item.timeSpent}</td>
-          <td>${formattedDate}</td>
-          <td>${item.type}</td>
-          <td>
-            <button class="btn btn-danger btn-sm delete-task" data-index="${index}">Delete</button>
-          </td>
-        </tr>
-      `;
-      tableBody.append(row);
-    });
-
-    // Add event listener for delete buttons
-    $(".delete-task").click(function () {
-      let index = $(this).data("index");
-      tasks.splice(index, 1);
-      localStorage.setItem("tasks", JSON.stringify(tasks));
-      renderTasks(tasks);
-    });
-  }
 });

@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     background-color: #f8f9fa;
     font-family: Arial, sans-serif;
@@ -9,42 +10,42 @@ body {
 }
 
 .header {
-    display: flex;
+   display: flex;
     align-items: center;
-    justify-content: center; /* Center horizontally */
+    justify-content: center; 
     width: 100%;
     background: linear-gradient(to right, #343a40, #6c757d);
-    padding: 10px; /* Reduced padding */
+    padding: 10px; 
     color: white;
-    height: 50px; /* Set a fixed height */
-    position: relative; /* Ensure the image and title are positioned correctly */
+    height: 50px; 
+    position: relative; 
 }
 
 .header img {
-    width: 30px; /* Adjusted width */
+    width: 30px; 
     height: auto;
-    position: absolute; /* Position the image absolutely */
-    left: 10px; /* Adjust the left position */
+    position: absolute; 
+    left: 10px; 
 }
 
 .header h1 {
-    font-size: 100px; /* Reduced font size */
-    margin: 0;
-    text-align: center; /* Center text */
-}
-.title-image {
     
-    width: 100px; /* Adjust the width as needed */
+    font-size: 100px;
+    margin: 0;
+    text-align: center; 
+}
+
+.title-image {
+    width: 100px; 
     height: auto;
     margin-right: 10px;
     vertical-align: middle;
 }
 
-/* Navigation Bar Styles */
 .navbar {
     display: flex;
-    justify-content: center; /* Center the content horizontally */
-    align-items: center; /* Center the content vertically */
+    justify-content: center; 
+    align-items: center; 
     width: 100%;
     background: linear-gradient(to right, #343a40, #6c757d);
     padding: 10px;
@@ -78,20 +79,19 @@ hr {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 800px; /* Set a maximum width for the main content */
-    margin: 0 auto; /* Center the main content */
+    max-width: 800px; 
+    margin: 0 auto; 
 }
 
-/* Table Styles */
 .table-responsive {
     margin-top: 20px;
-    max-width: 100%; /* Ensure the table does not exceed the main content width */
+    max-width: 100%; 
 }
 
 .table {
     width: 100%;
-    max-width: 100%; /* Set a maximum width for the table */
-    margin: 0 auto; /* Center the table */
+    max-width: 100%; 
+    margin: 0 auto; 
     color: #212529;
     border-collapse: collapse;
 }
@@ -125,10 +125,9 @@ hr {
     background-color: rgba(0, 0, 0, 0.05);
 }
 
-/* Form Styles */
 #taskForm {
-    max-width: 2000px; /* Set a maximum width for the form */
-    margin: 50px auto; /* Center the form and add vertical margin */
+    max-width: 2000px; 
+    margin: 50px auto; 
     padding: 20px;
     background-color: #ffffff;
     border-radius: 8px;
@@ -174,12 +173,11 @@ hr {
     margin-bottom: 1rem;
 }
 
-/* Sidebar Styles */
 .sidebar {
-    position: fixed; /* Changed to fixed */
-    top: 100px; /* Adjust this value based on the height of your navbar */
+    position: fixed; 
+    top: 100px; 
     left: 0;
-    height: calc(100% - 50px); /* Adjust this value based on the height of your navbar */
+    height: calc(100% - 50px); 
     width: 200px;
     background-color: #343a40;
     color: white;
@@ -210,14 +208,12 @@ hr {
     text-decoration: underline;
 }
 
-/* Adjust main content to account for sidebar */
 #mainContent {
-    margin-left: 220px; /* Adjust based on sidebar width */
-    max-width: 800px; /* Set a maximum width for the main content */
-    margin: 0 auto; /* Center the main content */
+    margin-left: 220px;
+    max-width: 800px; 
+    margin: 0 auto; 
 }
 
-/* Calendar Styles */
 #calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -240,5 +236,54 @@ hr {
 #calendar .day:nth-child(5),
 #calendar .day:nth-child(6),
 #calendar .day:nth-child(7) {
-    background-color: #d3d3d3; /* Change this color as needed */
+    background-color: #d3d3d3; 
+}
+
+.timer-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center; 
+    margin-top: 20px;
+}
+
+.timer-box {
+    width: 150px;
+    height: 150px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.red-timer {
+    background-color: #f84848;
+}
+
+.red-timer:hover {
+    background-color: #cc0000;
+}
+
+.green-timer {
+    background-color: #28a745;
+}
+
+.green-timer:hover {
+    background-color: #218838;
+}
+
+#timerDisplay1, #timerDisplay2 {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+    color: #343a40;
+    font-weight: bold;
+}
+
+.btn-warning {
+    margin: 0 20px; 
 }

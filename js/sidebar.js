@@ -11,7 +11,7 @@ $(document).ready(function () {
     $("#taskView").hide();
     $("#calendarView").show();
     $("#addItemView").hide();
-    generateCalendar(); // Call the function to generate the calendar
+    generateCalendar(); 
   });
 
   $("#addItem").click(function (event) {
